@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu
+  # labels:
+    # app: ubuntu
+  namespace: cg-akeyless
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    # metadata:
+      # labels:
+      #   app: ubuntu
+      # annotations: 
+      #   akeyless/enabled: "true"
+      #   akeyless/inject_file: "/K8s/app1secret"
+    spec:
+      containers:
+        - name: ubuntu
+          image: phusion/baseimage:focal-1.0.0
+          volumeMounts:
+            - name: public-key
+              mountPath: /opt/var/akeyless/pubkey
+            - name: startup-script
+              mountPath: /opt/var/akeyless/startup
+          command: [ "./opt/var/akeyless/startup/startup.sh" ]
+          ports:
+            - containerPort: 22
+              name: ssh
+              protocol: TCP
+          # ports:
+          # - containerPort: 3000
+          # env:
+          #   - name: PUB_KEY_LOC
+          #     valueFrom:
+          #       fieldRef:
+          #         fieldPath: spec.containers.
+      volumes:
+        - name: public-key
+          configMap: 
+            name: public-key-config
+        - name: startup-script
+          configMap:
+            name: startup-script-config
+            defaultMode: 0777
