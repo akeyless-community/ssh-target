@@ -6,14 +6,12 @@ commonLabels:
 
 resources:
   - deployment.yml
-  # - service.yml
+  - service.yml
 
 configMapGenerator:
   - name: public-key-config
-    namespace: cg-akeyless
     files:
       - ca.pub
   - name: startup-script-config
-    namespace: cg-akeyless
     files:
     - startup.sh
