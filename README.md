@@ -2,7 +2,7 @@
 
 ## Purpose
 
-To deploy a linux VM into a Kubernetes cluster using TrustedUserCA and connecting to the VM using SSH certificates
+To deploy a linux VM into a Kubernetes cluster using TrustedUserCA and connecting to the pod using SSH certificates
 
 ## Preparation
 
@@ -17,3 +17,8 @@ Deploy into cluster using kubectl and Kustomize
 ```sh
 kubectl apply -k .
 ```
+
+## Connect to the Workload
+
+- Wait for the Load Balancer IP to be provisioned
+- Connect to the Pod directly (using the exposed IP address of the service) using SSH Certificates or through Akeyless connect like `akeyless connect -t ubuntu@35.184.187.38 -c "/ninja-hw/hw5/SSH Issuer"`
