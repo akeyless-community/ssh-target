@@ -2,7 +2,7 @@
 
 ## Purpose
 
-To deploy a linux VM into a Kubernetes cluster using TrustedUserCA and SSH certificates
+To deploy a linux VM into a Kubernetes cluster using TrustedUserCA and connecting to the VM using SSH certificates
 
 ## Preparation
 
